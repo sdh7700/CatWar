@@ -4,26 +4,39 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-  public Transform target;
-  public float speed;
-  public float withinRange;
+    public Transform target;
 
-  // Start is called before the first frame update
-  void Start()
-  {
+    public int health;
+    public float speed;
+    public float withinRange;
 
-  }
+    SpriteRenderer spriteRenderer;
 
-  // Update is called once per frame
-  void Update()
-  {
-    // Get the distance between enemy and player
-    float dist = Vector3.Distance(target.position, transform.position);
-    // check if it is within the range you set
-    if (dist <= withinRange)
+    void Awake()
     {
-      // move to target
-      transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-  }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Get the distance between enemy and player
+        float dist = Vector3.Distance(target.position, transform.position);
+        // check if it is within the range you set
+        if (dist <= withinRange)
+        {
+            // move to target
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            spriteRenderer.flipX = transform.position.x > target.position.x;
+            if (transform.position.y < target.position.y)
+                spriteRenderer.sortingOrder = 3;
+            else
+                spriteRenderer.sortingOrder = 2;
+        }
+    }
+
+    void OnHit(int dmg)
+    {
+        health -= dmg;
+    }
 }
