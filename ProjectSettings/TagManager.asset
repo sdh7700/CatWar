@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - BulletBorder
+  - Bullet
+  - Enemy
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

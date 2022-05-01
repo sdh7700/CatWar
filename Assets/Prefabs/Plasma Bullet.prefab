@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2352133289194389231}
   m_Layer: 0
   m_Name: Plasma Bullet
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,3 +154,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d072c05e2454a994f871e6eb32c4b1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmg: 1

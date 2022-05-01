@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 49078cdb78719f148b2cbf4e85ddb535
+guid: 7b181a4e27a67ba40bc6e39dc254e50a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8417324920645966399
-    second: cat_idle_anim_v2_0
+      213: 6780370862254104375
+    second: ghost_die_0
   - first:
-      213: 4481671189062745661
-    second: cat_idle_anim_v2_1
+      213: -5522220082046097464
+    second: ghost_die_1
+  - first:
+      213: 2470421307580881325
+    second: ghost_die_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -48,7 +51,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 3
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -71,7 +74,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -83,31 +86,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 4096
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 4096
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -119,7 +98,31 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: iPhone
-    maxTextureSize: 4096
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -133,43 +136,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cat_idle_anim_v2_0
+      name: ghost_die_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 73
-        height: 80
+        width: 70
+        height: 83
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3a552e1b6850d470800000000000000
-      internalID: 8417324920645966399
+      spriteID: 73f90121067b81e50800000000000000
+      internalID: 6780370862254104375
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_idle_anim_v2_1
+      name: ghost_die_1
       rect:
         serializedVersion: 2
-        x: 73
+        x: 70
         y: 0
-        width: 73
-        height: 80
+        width: 70
+        height: 83
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3eff289338123e30800000000000000
-      internalID: 4481671189062745661
+      spriteID: 8c72d16e7122d53b0800000000000000
+      internalID: -5522220082046097464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_die_2
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 70
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da91ae32713b84220800000000000000
+      internalID: 2470421307580881325
       vertices: []
       indices: 
       edges: []
