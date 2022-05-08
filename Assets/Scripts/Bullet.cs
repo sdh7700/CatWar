@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-  public int dmg;
-  // Start is called before the first frame update
-  void Start()
-  {
+    public int dmg;
+    public ParticleSystem particleObject;
 
-  }
+    // Start is called before the first frame update
+    void Start()
+    {
+        particleObject.Play();
+    }
 
-  // Update is called once per frame
-  void Update()
-  {
+    // Update is called once per frame
+    void Update()
+    {
 
-  }
+    }
 
-  void OnTriggerEnter2D(Collider2D other)
-  {
-    if (other.gameObject.tag == "BulletBorder")
-      gameObject.SetActive(false);
-  }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "BulletBorder" || other.gameObject.tag == "Enemy")
+            gameObject.SetActive(false);
+    }
 }

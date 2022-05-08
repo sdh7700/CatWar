@@ -4,65 +4,76 @@ using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
 {
-  public GameObject plasmaBulletPrefab;
-  public GameObject ghostPrefab;
+    public GameObject normalBulletPrefab;
+    public GameObject plasmaBulletPrefab;
 
-  GameObject[] ghost;
-  GameObject[] plasmaBullet;
+    public GameObject ghostPrefab;
 
-  GameObject[] targetPool;
+    GameObject[] normalBullet;
+    GameObject[] plasmaBullet;
 
-  void Awake()
-  {
-    // enemy
-    ghost = new GameObject[100];
+    GameObject[] ghost;
 
-    // bullet
-    plasmaBullet = new GameObject[100];
+    GameObject[] targetPool;
 
-    Generate();
-  }
-
-  void Generate()
-  {
-    // #1. Enemy
-    for (int i = 0; i < ghost.Length; i++)
+    void Awake()
     {
-      ghost[i] = Instantiate(ghostPrefab);
-      ghost[i].SetActive(false);
+        // bullet
+        normalBullet = new GameObject[100];
+        plasmaBullet = new GameObject[100];
+
+        // enemy
+        ghost = new GameObject[100];
+
+        Generate();
     }
 
-    // #2. Bullet
-    for (int i = 0; i < plasmaBullet.Length; i++)
+    void Generate()
     {
-      plasmaBullet[i] = Instantiate(plasmaBulletPrefab);
-      plasmaBullet[i].SetActive(false);
-    }
-  }
+        // #1. Bullet
+        for (int i = 0; i < normalBullet.Length; i++)
+        {
+            normalBullet[i] = Instantiate(normalBulletPrefab);
+            normalBullet[i].SetActive(false);
+        }
+        for (int i = 0; i < plasmaBullet.Length; i++)
+        {
+            plasmaBullet[i] = Instantiate(plasmaBulletPrefab);
+            plasmaBullet[i].SetActive(false);
+        }
 
-  public GameObject MakeObj(string type)
-  {
-
-
-    switch (type)
-    {
-      case "Ghost":
-        targetPool = ghost;
-        break;
-      case "PlasmaBullet":
-        targetPool = plasmaBullet;
-        break;
-    }
-
-    for (int i = 0; i < targetPool.Length; i++)
-    {
-      if (!targetPool[i].activeSelf)
-      {
-        targetPool[i].SetActive(true);
-        return targetPool[i];
-      }
+        // #2. Enemy
+        for (int i = 0; i < ghost.Length; i++)
+        {
+            ghost[i] = Instantiate(ghostPrefab);
+            ghost[i].SetActive(false);
+        }
     }
 
-    return null;
-  }
+    public GameObject MakeObj(string type)
+    {
+        switch (type)
+        {
+            case "NormalBullet":
+                targetPool = normalBullet;
+                break;
+            case "PlasmaBullet":
+                targetPool = plasmaBullet;
+                break;
+            case "Ghost":
+                targetPool = ghost;
+                break;
+        }
+
+        for (int i = 0; i < targetPool.Length; i++)
+        {
+            if (!targetPool[i].activeSelf)
+            {
+                targetPool[i].SetActive(true);
+                return targetPool[i];
+            }
+        }
+
+        return null;
+    }
 }
