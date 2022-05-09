@@ -10,7 +10,10 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        particleObject.Play();
+    }
+    void Awake()
+    {
+        Debug.Log("awake");
     }
 
     // Update is called once per frame
@@ -22,6 +25,9 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "BulletBorder" || other.gameObject.tag == "Enemy")
+        {
+            particleObject.Stop();
             gameObject.SetActive(false);
+        }
     }
 }
