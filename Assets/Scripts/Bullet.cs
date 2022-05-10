@@ -7,13 +7,9 @@ public class Bullet : MonoBehaviour
     public int dmg;
     public ParticleSystem particleObject;
 
-    // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-    }
-    void Awake()
-    {
-        Debug.Log("awake");
+        //particleObject.Play();
     }
 
     // Update is called once per frame

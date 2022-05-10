@@ -11,8 +11,11 @@ public class PlayerOrb : MonoBehaviour
     public float curShotDelay;
     public float bulletSpeed;
 
+    SpriteRenderer spriteRenderer;
+
     void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -49,9 +52,17 @@ public class PlayerOrb : MonoBehaviour
             Vector2 now = (closestEnemy.transform.position - transform.position).normalized;
 
             rigidBullet.AddForce(now * bulletSpeed, ForceMode2D.Impulse);
+            spriteRenderer.color = new Color32(168, 168, 168, 255);
+            Invoke("ReturnColor", 0.1f);
+
         }
 
         curShotDelay = 0;
+    }
+
+    void ReturnColor()
+    {
+        spriteRenderer.color = new Color32(255, 255, 255, 255);
     }
 
     // Find closest enemy
