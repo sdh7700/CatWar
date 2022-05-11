@@ -4817,6 +4817,7 @@ GameObject:
   - component: {fileID: 126557141160787890}
   - component: {fileID: 126557141160787891}
   - component: {fileID: 126557141160787888}
+  - component: {fileID: 4280424993473110718}
   m_Layer: 0
   m_Name: Normal Bullet
   m_TagString: PlayerBullet
@@ -4941,3 +4942,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 1
   particleObject: {fileID: 126557141113189956}
+--- !u!95 &4280424993473110718
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126557141160787889}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a13de7d883d23a14a935d84c74ad7b4a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

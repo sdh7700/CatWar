@@ -6,11 +6,9 @@ public class Bullet : MonoBehaviour
 {
     public int dmg;
     public ParticleSystem particleObject;
+    public GameObject explosion;
+    public GameManager gameManager;
 
-    void OnEnable()
-    {
-        //particleObject.Play();
-    }
 
     // Update is called once per frame
     void Update()
@@ -22,7 +20,8 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.tag == "BulletBorder" || other.gameObject.tag == "Enemy")
         {
-            particleObject.Stop();
+            gameManager.CallExplosion(transform.position);
+            //particleObject.Stop();
             gameObject.SetActive(false);
         }
     }

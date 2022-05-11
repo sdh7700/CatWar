@@ -9,12 +9,16 @@ public class ObjectManager : MonoBehaviour
 
     public GameObject ghostPrefab;
 
+    public GameObject explosionPrefab;
+
     GameObject[] normalBullet;
     GameObject[] plasmaBullet;
 
     GameObject[] ghost;
 
     GameObject[] targetPool;
+
+    GameObject[] explosion;
 
     void Awake()
     {
@@ -24,6 +28,9 @@ public class ObjectManager : MonoBehaviour
 
         // enemy
         ghost = new GameObject[100];
+
+        // Explosion
+        explosion = new GameObject[100];
 
         Generate();
     }
@@ -48,6 +55,13 @@ public class ObjectManager : MonoBehaviour
             ghost[i] = Instantiate(ghostPrefab);
             ghost[i].SetActive(false);
         }
+
+        // #3. Explosion
+        for (int i = 0; i < explosion.Length; i++)
+        {
+            explosion[i] = Instantiate(explosionPrefab);
+            explosion[i].SetActive(false);
+        }
     }
 
     public GameObject MakeObj(string type)
@@ -62,6 +76,9 @@ public class ObjectManager : MonoBehaviour
                 break;
             case "Ghost":
                 targetPool = ghost;
+                break;
+            case "Explosion":
+                targetPool = explosion;
                 break;
         }
 

@@ -498,7 +498,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectManager: {fileID: 1356054747}
   playerTransform: {fileID: 36786932}
-  maxShotDelay: 0.5
+  gameManager: {fileID: 755060011}
+  maxShotDelay: 1.5
   curShotDelay: 0
   bulletSpeed: 12
 --- !u!1 &183071156
@@ -564,36 +565,6 @@ Transform:
   - {fileID: 1191501384}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &407777881
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 407777882}
-  m_Layer: 0
-  m_Name: Eff_Magic_Water
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &407777882
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407777881}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.16, y: -1.61, z: -33.799187}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &701790182
 GameObject:
@@ -1084,6 +1055,7 @@ MonoBehaviour:
   normalBulletPrefab: {fileID: 126557141160787889, guid: e640f02b2ab2c5b4aa215776cc5930be, type: 3}
   plasmaBulletPrefab: {fileID: 5140504144288618652, guid: 5b6711d15444fee49ad0765d413e3453, type: 3}
   ghostPrefab: {fileID: 8091280434647517695, guid: 4579272b80c7a5a47aeac8909bb9de9e, type: 3}
+  explosionPrefab: {fileID: 8595137121617637952, guid: b23a635412a1229418296d7889de69fc, type: 3}
 --- !u!1 &1515513421
 GameObject:
   m_ObjectHideFlags: 0

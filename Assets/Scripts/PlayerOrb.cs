@@ -6,6 +6,7 @@ public class PlayerOrb : MonoBehaviour
 {
     public ObjectManager objectManager;
     public Transform playerTransform;
+    public GameManager gameManager;
 
     public float maxShotDelay;
     public float curShotDelay;
@@ -47,7 +48,9 @@ public class PlayerOrb : MonoBehaviour
         if (closestEnemy != null)
         {
             GameObject bullet = objectManager.MakeObj("NormalBullet");
+            Bullet bulletLogic = bullet.GetComponent<Bullet>();
             Rigidbody2D rigidBullet = bullet.GetComponent<Rigidbody2D>();
+            bulletLogic.gameManager = gameManager;
             bullet.transform.position = transform.position;
             Vector2 now = (closestEnemy.transform.position - transform.position).normalized;
 

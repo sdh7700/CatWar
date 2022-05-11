@@ -41,4 +41,13 @@ public class GameManager : MonoBehaviour
         Enemy enemyLogic = enemy.GetComponent<Enemy>();
         enemyLogic.player = player;
     }
+
+    public void CallExplosion(Vector3 pos)
+    {
+        GameObject explosion = objectManager.MakeObj("Explosion");
+        Explosion explosionLogic = explosion.GetComponent<Explosion>();
+
+        explosion.transform.position = pos;
+        explosionLogic.StartExplosion();
+    }
 }
