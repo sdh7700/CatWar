@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Joystick joystick;
+
     public float speed;
     public float bulletSpeed;
     public float maxShotDelay;
@@ -22,9 +24,36 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //playerAnim.SetInteger("Input", 1);
+        if (joystick.Horizontal != 0 || joystick.Vertical != 0)
+        {
+            playerAnim.SetInteger("Input", 1);
+            // if (Input.GetButton("Fire1"))
+
+            // Change Direction
+            spriteRenderer.flipX = joystick.Horizontal < 0;
+            Debug.Log("moving");
+
+            MoveControl();
+        }
+        else
+        {
+            Debug.Log("not moving");
+            playerAnim.SetInteger("Input", 0);
+        }
         Move();
         //Fire();
         //Reload();
+    }
+
+    private void MoveControl()
+    {
+        Vector3 upMovement = Vector3.up * speed * Time.deltaTime * joystick.Vertical;
+        Vector3 rightMovement = Vector3.right * speed * Time.deltaTime * joystick.Horizontal;
+        //Vector3 movement = (upMovement + rightMovement).normalized;
+        //transform.position += movement;
+        transform.position += upMovement;
+        transform.position += rightMovement;
     }
     void Move()
     {
@@ -41,10 +70,10 @@ public class Player : MonoBehaviour
         }
 
         // Walking Animation
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
-            playerAnim.SetInteger("Input", 1);
-        else
-            playerAnim.SetInteger("Input", 0);
+        // if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+        //     playerAnim.SetInteger("Input", 1);
+        // else
+        //     playerAnim.SetInteger("Input", 0);
     }
 
     void Fire()

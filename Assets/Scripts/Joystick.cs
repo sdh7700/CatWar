@@ -25,18 +25,37 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 
     public void OnPointerDown(PointerEventData eventData)
     {
-
+        OnDrag(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 radius = outLine.sizeDelta / 2;
+        // 조이스틱 중앙에서 터치한 곳까지의 거리를 백분율로 나타냄
         input = (eventData.position - outLine.anchoredPosition) / (radius * canvas.scaleFactor);
+        // 거리가 조이스틱을 넘어가거나 데드존에 진입할 경우 제어
+        HandleInput(input.magnitude, input.normalized);
+        Debug.Log(input * radius * handleRange);
+        handle.anchoredPosition = input * radius * handleRange;
+
+
+    }
+
+    private void HandleInput(float magnitude, Vector2 normalizedVector)
+    {
+        if (magnitude > deadZone)
+        {
+            if (magnitude > 1)
+                input = normalizedVector;
+        }
+        else
+            input = Vector2.zero;
     }
 
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        input = Vector2.zero;
+        handle.anchoredPosition = Vector2.zero;
     }
 }
