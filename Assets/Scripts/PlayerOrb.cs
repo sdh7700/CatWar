@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerOrb : MonoBehaviour
 {
+    public Joystick joystick;
+
     public ObjectManager objectManager;
     public Transform playerTransform;
     public GameManager gameManager;
@@ -29,14 +31,18 @@ public class PlayerOrb : MonoBehaviour
 
     void Move()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        if (Input.GetButton("Horizontal"))
-        {
-            if (h >= 0)
-                transform.position = playerTransform.position + new Vector3(1.2f, 0, 0);
-            else
-                transform.position = playerTransform.position + new Vector3(-1.2f, 0, 0);
-        }
+        if (joystick.Horizontal < 0)
+            transform.position = playerTransform.position + new Vector3(-1.2f, 0, 0);
+        else
+            transform.position = playerTransform.position + new Vector3(1.2f, 0, 0);
+        // float h = Input.GetAxisRaw("Horizontal");
+        // if (Input.GetButton("Horizontal"))
+        // {
+        //     if (h >= 0)
+        //         transform.position = playerTransform.position + new Vector3(1.2f, 0, 0);
+        //     else
+        //         transform.position = playerTransform.position + new Vector3(-1.2f, 0, 0);
+        // }
     }
 
     void Fire()

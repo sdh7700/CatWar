@@ -24,21 +24,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //playerAnim.SetInteger("Input", 1);
         if (joystick.Horizontal != 0 || joystick.Vertical != 0)
         {
             playerAnim.SetInteger("Input", 1);
-            // if (Input.GetButton("Fire1"))
 
             // Change Direction
             spriteRenderer.flipX = joystick.Horizontal < 0;
-            Debug.Log("moving");
 
             MoveControl();
         }
         else
         {
-            Debug.Log("not moving");
             playerAnim.SetInteger("Input", 0);
         }
         Move();
@@ -50,8 +46,6 @@ public class Player : MonoBehaviour
     {
         Vector3 upMovement = Vector3.up * speed * Time.deltaTime * joystick.Vertical;
         Vector3 rightMovement = Vector3.right * speed * Time.deltaTime * joystick.Horizontal;
-        //Vector3 movement = (upMovement + rightMovement).normalized;
-        //transform.position += movement;
         transform.position += upMovement;
         transform.position += rightMovement;
     }
@@ -63,6 +57,7 @@ public class Player : MonoBehaviour
         Vector3 nextPos = new Vector3(h, v, 0) * speed * Time.deltaTime;
 
         transform.position = curPos + nextPos;
+
         // Change Direction
         if (Input.GetButton("Horizontal"))
         {

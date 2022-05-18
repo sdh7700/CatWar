@@ -35,7 +35,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
         input = (eventData.position - outLine.anchoredPosition) / (radius * canvas.scaleFactor);
         // 거리가 조이스틱을 넘어가거나 데드존에 진입할 경우 제어
         HandleInput(input.magnitude, input.normalized);
-        Debug.Log(input * radius * handleRange);
+
         handle.anchoredPosition = input * radius * handleRange;
 
 
