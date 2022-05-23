@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,18 +14,17 @@ public class GameManager : MonoBehaviour
 
     public ObjectManager objectManager;
     public GameObject player;
+    public GameObject playerOrb;
     Player playerLogic;
+    PlayerOrb playerOrbLogic;
 
     public GameObject gameoverImage;
+    public Slider expGage;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
     void Awake()
     {
         playerLogic = player.GetComponent<Player>();
+        playerOrbLogic = playerOrb.GetComponent<PlayerOrb>();
     }
 
     // Update is called once per frame
@@ -35,16 +36,25 @@ public class GameManager : MonoBehaviour
             SpawnEnemy();
             curSpawnDelay = 0;
         }
-        GameOverCheck();
+        GameOver();
+        GameQuit();
     }
 
     void SpawnEnemy()
     {
-        int randomPoint = Random.Range(0, 4);
-        GameObject enemy = objectManager.MakeObj("Ghost");
-        enemy.transform.position = spawnPoints[randomPoint].position;
-        Enemy enemyLogic = enemy.GetComponent<Enemy>();
-        enemyLogic.player = player;
+        int randomPoint = UnityEngine.Random.Range(0, 4);
+        try
+        {
+            GameObject enemy = objectManager.MakeObj("Ghost");
+            enemy.transform.position = spawnPoints[randomPoint].position;
+            Enemy enemyLogic = enemy.GetComponent<Enemy>();
+            enemyLogic.player = player;
+            enemyLogic.gameManager = this;
+        }
+        catch (NullReferenceException nre)
+        {
+            Debug.Log(nre);
+        }
     }
 
     public void CallExplosion(Vector3 pos)
@@ -56,7 +66,21 @@ public class GameManager : MonoBehaviour
         explosionLogic.StartExplosion();
     }
 
-    void GameOverCheck()
+    public void PlayerExpUp(int enemyExp)
+    {
+        Debug.Log(enemyExp);
+        playerLogic.curExp += enemyExp;
+        expGage.value = (float)playerLogic.curExp / playerLogic.needExp[playerLogic.level];
+        if (expGage.value >= 1 && playerLogic.level <= 10)
+        {
+            expGage.value = 0;
+            playerLogic.curExp = 0;
+            playerLogic.level++;
+            playerOrbLogic.maxShotDelay *= 0.8f;
+        }
+    }
+
+    void GameOver()
     {
         if (playerLogic.HP <= 0)
         {
@@ -67,5 +91,13 @@ public class GameManager : MonoBehaviour
     public void GameRetry()
     {
         SceneManager.LoadScene(0);
+    }
+
+    void GameQuit()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }

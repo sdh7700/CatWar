@@ -5,9 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public GameObject player;
+    public GameManager gameManager;
+
+    public int enemyExp;
 
     public int maxHealth;
     public int health;
+
     public float maxSpeed;
     public float speed;
     public float withinRange;
@@ -67,6 +71,7 @@ public class Enemy : MonoBehaviour
             enemyAnim.SetTrigger("Die");
             boxCollider2D.enabled = false;
             speed = 0;
+            gameManager.PlayerExpUp(enemyExp);
             Invoke("EnemyDie", 0.8f);
 
             //gameObject.SetActive(false);

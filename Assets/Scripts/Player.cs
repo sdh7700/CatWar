@@ -7,11 +7,16 @@ public class Player : MonoBehaviour
     public Joystick joystick;
 
     public float speed;
-    public float bulletSpeed;
-    public float maxShotDelay;
-    public float curShotDelay;
+    // public float bulletSpeed;
+    // public float maxShotDelay;
+    // public float curShotDelay;
     public int maxHP;
     public int HP;
+
+    // About Level
+    public int level;
+    public int[] needExp;
+    public int curExp;
 
     public ObjectManager objectManager;
     Animator playerAnim;
@@ -30,10 +35,8 @@ public class Player : MonoBehaviour
         if (joystick.Horizontal != 0 || joystick.Vertical != 0)
         {
             playerAnim.SetInteger("Input", 1);
-
             // Change Direction
             spriteRenderer.flipX = joystick.Horizontal < 0;
-
             MoveControl();
         }
         else
@@ -74,34 +77,34 @@ public class Player : MonoBehaviour
         //     playerAnim.SetInteger("Input", 0);
     }
 
-    void Fire()
-    {
-        if (!Input.GetButton("Fire1"))
-            return;
-        if (curShotDelay < maxShotDelay)
-            return;
+    // void Fire()
+    // {
+    //     if (!Input.GetButton("Fire1"))
+    //         return;
+    //     if (curShotDelay < maxShotDelay)
+    //         return;
 
-        GameObject bullet = objectManager.MakeObj("PlasmaBullet");
+    //     GameObject bullet = objectManager.MakeObj("PlasmaBullet");
 
-        Rigidbody2D rigidBullet = bullet.GetComponent<Rigidbody2D>();
-        if (spriteRenderer.flipX == true)
-        {
-            bullet.transform.position = transform.position + new Vector3(-1, 0, 0);
-            rigidBullet.AddForce(Vector2.left * bulletSpeed, ForceMode2D.Impulse);
-        }
-        else
-        {
-            bullet.transform.position = transform.position + new Vector3(1, 0, 0);
-            rigidBullet.AddForce(Vector2.right * bulletSpeed, ForceMode2D.Impulse);
-        }
+    //     Rigidbody2D rigidBullet = bullet.GetComponent<Rigidbody2D>();
+    //     if (spriteRenderer.flipX == true)
+    //     {
+    //         bullet.transform.position = transform.position + new Vector3(-1, 0, 0);
+    //         rigidBullet.AddForce(Vector2.left * bulletSpeed, ForceMode2D.Impulse);
+    //     }
+    //     else
+    //     {
+    //         bullet.transform.position = transform.position + new Vector3(1, 0, 0);
+    //         rigidBullet.AddForce(Vector2.right * bulletSpeed, ForceMode2D.Impulse);
+    //     }
 
-        curShotDelay = 0;
-    }
+    //     curShotDelay = 0;
+    // }
 
-    void Reload()
-    {
-        curShotDelay += Time.deltaTime;
-    }
+    // void Reload()
+    // {
+    //     curShotDelay += Time.deltaTime;
+    // }
 
     void OnTriggerEnter2D(Collider2D other)
     {

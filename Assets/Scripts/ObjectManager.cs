@@ -27,7 +27,7 @@ public class ObjectManager : MonoBehaviour
         plasmaBullet = new GameObject[100];
 
         // enemy
-        ghost = new GameObject[100];
+        ghost = new GameObject[300];
 
         // Explosion
         explosion = new GameObject[100];
