@@ -7,8 +7,8 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    // Enemy Spawn
     public Transform[] spawnPoints;
-
     public float maxSpawnDelay;
     public float curSpawnDelay;
 
@@ -18,13 +18,16 @@ public class GameManager : MonoBehaviour
     Player playerLogic;
     PlayerOrb playerOrbLogic;
 
+    // UI
     public GameObject gameoverImage;
     public Slider expGage;
+    public Text levelText;
 
     void Awake()
     {
         playerLogic = player.GetComponent<Player>();
         playerOrbLogic = playerOrb.GetComponent<PlayerOrb>();
+        levelText.text = "Lv 1";
     }
 
     // Update is called once per frame
@@ -77,6 +80,7 @@ public class GameManager : MonoBehaviour
             playerLogic.curExp = 0;
             playerLogic.level++;
             playerOrbLogic.maxShotDelay *= 0.8f;
+            levelText.text = "Lv" + playerLogic.level;
         }
     }
 
