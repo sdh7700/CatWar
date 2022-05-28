@@ -4,21 +4,28 @@ using UnityEngine;
 
 public class BulletRoundball : MonoBehaviour
 {
-    public float bulletSpeed;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  public Transform player;
+  public GameManager gameManager;
+  public float bulletSpeed;
+  public int dmg;
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.position = transform.position + new Vector3(0,0,0);
-    }
+  // Start is called before the first frame update
+  void Start()
+  {
 
-    void aaa(){
-        
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    transform.RotateAround(player.position, Vector3.back, bulletSpeed * Time.deltaTime);
+  }
+
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.tag == "Enemy")
+    {
+      gameManager.CallExplosion(transform.position);
     }
+  }
 }

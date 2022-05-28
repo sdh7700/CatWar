@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - PlayerBullet
   - BlockingFeature
+  - PlayerRoundBall
   layers:
   - Default
   - TransparentFX

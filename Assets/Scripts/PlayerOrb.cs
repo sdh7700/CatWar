@@ -4,99 +4,99 @@ using UnityEngine;
 
 public class PlayerOrb : MonoBehaviour
 {
-    public Joystick joystick;
+  public Joystick joystick;
 
-    public ObjectManager objectManager;
-    public Transform playerTransform;
-    public GameManager gameManager;
+  public ObjectManager objectManager;
+  public Transform playerTransform;
+  public GameManager gameManager;
 
-    public float maxShotDelay;
-    public float curShotDelay;
-    public float bulletSpeed;
+  public float maxShotDelay;
+  public float curShotDelay;
+  public float bulletSpeed;
 
-    SpriteRenderer spriteRenderer;
+  SpriteRenderer spriteRenderer;
 
-    void Awake()
+  void Awake()
+  {
+    spriteRenderer = GetComponent<SpriteRenderer>();
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    Move();
+    Fire();
+    Reload();
+  }
+
+  void Move()
+  {
+    if (joystick.Horizontal < 0)
+      transform.position = playerTransform.position + new Vector3(-1.2f, 0, 0);
+    else
+      transform.position = playerTransform.position + new Vector3(1.2f, 0, 0);
+    // float h = Input.GetAxisRaw("Horizontal");
+    // if (Input.GetButton("Horizontal"))
+    // {
+    //     if (h >= 0)
+    //         transform.position = playerTransform.position + new Vector3(1.2f, 0, 0);
+    //     else
+    //         transform.position = playerTransform.position + new Vector3(-1.2f, 0, 0);
+    // }
+  }
+
+  void Fire()
+  {
+    if (curShotDelay < maxShotDelay)
+      return;
+    Enemy closestEnemy = null;
+    closestEnemy = FindClosestEnemy();
+    if (closestEnemy != null)
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+      GameObject bullet = objectManager.MakeObj("NormalBullet");
+      Bullet bulletLogic = bullet.GetComponent<Bullet>();
+      Rigidbody2D rigidBullet = bullet.GetComponent<Rigidbody2D>();
+      bulletLogic.gameManager = gameManager;
+      bullet.transform.position = transform.position;
+      Vector2 now = (closestEnemy.transform.position - transform.position).normalized;
+
+      rigidBullet.AddForce(now * bulletSpeed, ForceMode2D.Impulse);
+      spriteRenderer.color = new Color32(168, 168, 168, 255);
+      Invoke("ReturnColor", 0.1f);
+
     }
 
-    // Update is called once per frame
-    void Update()
+    curShotDelay = 0;
+  }
+
+  void ReturnColor()
+  {
+    spriteRenderer.color = new Color32(255, 255, 255, 255);
+  }
+
+  // Find closest enemy
+  Enemy FindClosestEnemy()
+  {
+    float distanceToClosestEnemy = Mathf.Infinity;
+    Enemy closestEnemy = null;
+    Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
+
+    foreach (Enemy currentEnemy in allEnemies)
     {
-        Move();
-        Fire();
-        Reload();
+      float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
+      if (distanceToEnemy < distanceToClosestEnemy)
+      {
+        distanceToClosestEnemy = distanceToEnemy;
+        closestEnemy = currentEnemy;
+      }
     }
 
-    void Move()
-    {
-        if (joystick.Horizontal < 0)
-            transform.position = playerTransform.position + new Vector3(-1.2f, 0, 0);
-        else
-            transform.position = playerTransform.position + new Vector3(1.2f, 0, 0);
-        // float h = Input.GetAxisRaw("Horizontal");
-        // if (Input.GetButton("Horizontal"))
-        // {
-        //     if (h >= 0)
-        //         transform.position = playerTransform.position + new Vector3(1.2f, 0, 0);
-        //     else
-        //         transform.position = playerTransform.position + new Vector3(-1.2f, 0, 0);
-        // }
-    }
+    return closestEnemy;
+  }
 
-    void Fire()
-    {
-        if (curShotDelay < maxShotDelay)
-            return;
-        Enemy closestEnemy = null;
-        closestEnemy = FindClosestEnemy();
-        if (closestEnemy != null)
-        {
-            GameObject bullet = objectManager.MakeObj("NormalBullet");
-            Bullet bulletLogic = bullet.GetComponent<Bullet>();
-            Rigidbody2D rigidBullet = bullet.GetComponent<Rigidbody2D>();
-            bulletLogic.gameManager = gameManager;
-            bullet.transform.position = transform.position;
-            Vector2 now = (closestEnemy.transform.position - transform.position).normalized;
-
-            rigidBullet.AddForce(now * bulletSpeed, ForceMode2D.Impulse);
-            spriteRenderer.color = new Color32(168, 168, 168, 255);
-            Invoke("ReturnColor", 0.1f);
-
-        }
-
-        curShotDelay = 0;
-    }
-
-    void ReturnColor()
-    {
-        spriteRenderer.color = new Color32(255, 255, 255, 255);
-    }
-
-    // Find closest enemy
-    Enemy FindClosestEnemy()
-    {
-        float distanceToClosestEnemy = Mathf.Infinity;
-        Enemy closestEnemy = null;
-        Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
-
-        foreach (Enemy currentEnemy in allEnemies)
-        {
-            float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
-            if (distanceToEnemy < distanceToClosestEnemy)
-            {
-                distanceToClosestEnemy = distanceToEnemy;
-                closestEnemy = currentEnemy;
-            }
-        }
-
-        return closestEnemy;
-    }
-
-    void Reload()
-    {
-        curShotDelay += Time.deltaTime;
-    }
+  void Reload()
+  {
+    curShotDelay += Time.deltaTime;
+  }
 
 }

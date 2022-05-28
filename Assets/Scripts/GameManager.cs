@@ -7,101 +7,101 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    // Enemy Spawn
-    public Transform[] spawnPoints;
-    public float maxSpawnDelay;
-    public float curSpawnDelay;
+  // Enemy Spawn
+  public Transform[] spawnPoints;
+  public float maxSpawnDelay;
+  public float curSpawnDelay;
 
-    public ObjectManager objectManager;
-    public GameObject player;
-    public GameObject playerOrb;
-    Player playerLogic;
-    PlayerOrb playerOrbLogic;
+  public ObjectManager objectManager;
+  public GameObject player;
+  public GameObject playerOrb;
+  Player playerLogic;
+  PlayerOrb playerOrbLogic;
 
-    // UI
-    public GameObject gameoverImage;
-    public Slider expGage;
-    public Text levelText;
+  // UI
+  public GameObject gameoverImage;
+  public Slider expGage;
+  public Text levelText;
 
-    void Awake()
+  void Awake()
+  {
+    playerLogic = player.GetComponent<Player>();
+    playerOrbLogic = playerOrb.GetComponent<PlayerOrb>();
+    levelText.text = "Lv 1";
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    curSpawnDelay += Time.deltaTime;
+    if (curSpawnDelay > maxSpawnDelay)
     {
-        playerLogic = player.GetComponent<Player>();
-        playerOrbLogic = playerOrb.GetComponent<PlayerOrb>();
-        levelText.text = "Lv 1";
+      SpawnEnemy();
+      curSpawnDelay = 0;
     }
+    GameOver();
+    GameQuit();
+  }
 
-    // Update is called once per frame
-    void Update()
+  void SpawnEnemy()
+  {
+    int randomPoint = UnityEngine.Random.Range(0, 4);
+    try
     {
-        curSpawnDelay += Time.deltaTime;
-        if (curSpawnDelay > maxSpawnDelay)
-        {
-            SpawnEnemy();
-            curSpawnDelay = 0;
-        }
-        GameOver();
-        GameQuit();
+      GameObject enemy = objectManager.MakeObj("Ghost");
+      enemy.transform.position = spawnPoints[randomPoint].position;
+      Enemy enemyLogic = enemy.GetComponent<Enemy>();
+      enemyLogic.player = player;
+      enemyLogic.gameManager = this;
     }
-
-    void SpawnEnemy()
+    catch (NullReferenceException nre)
     {
-        int randomPoint = UnityEngine.Random.Range(0, 4);
-        try
-        {
-            GameObject enemy = objectManager.MakeObj("Ghost");
-            enemy.transform.position = spawnPoints[randomPoint].position;
-            Enemy enemyLogic = enemy.GetComponent<Enemy>();
-            enemyLogic.player = player;
-            enemyLogic.gameManager = this;
-        }
-        catch (NullReferenceException nre)
-        {
-            Debug.Log(nre);
-        }
+      Debug.Log(nre);
     }
+  }
 
-    public void CallExplosion(Vector3 pos)
+  public void CallExplosion(Vector3 pos)
+  {
+    GameObject explosion = objectManager.MakeObj("Explosion");
+    Explosion explosionLogic = explosion.GetComponent<Explosion>();
+
+    explosion.transform.position = pos;
+    explosionLogic.StartExplosion();
+  }
+
+  public void PlayerExpUp(int enemyExp)
+  {
+    Debug.Log(enemyExp);
+    playerLogic.curExp += enemyExp;
+    expGage.value = (float)playerLogic.curExp / playerLogic.needExp[playerLogic.level];
+    if (expGage.value >= 1 && playerLogic.level <= 10)
     {
-        GameObject explosion = objectManager.MakeObj("Explosion");
-        Explosion explosionLogic = explosion.GetComponent<Explosion>();
-
-        explosion.transform.position = pos;
-        explosionLogic.StartExplosion();
+      expGage.value = 0;
+      playerLogic.curExp = 0;
+      playerLogic.level++;
+      playerOrbLogic.maxShotDelay *= 0.9f;
+      levelText.text = "Lv" + playerLogic.level;
     }
+  }
 
-    public void PlayerExpUp(int enemyExp)
+  void GameOver()
+  {
+    if (playerLogic.HP <= 0)
     {
-        Debug.Log(enemyExp);
-        playerLogic.curExp += enemyExp;
-        expGage.value = (float)playerLogic.curExp / playerLogic.needExp[playerLogic.level];
-        if (expGage.value >= 1 && playerLogic.level <= 10)
-        {
-            expGage.value = 0;
-            playerLogic.curExp = 0;
-            playerLogic.level++;
-            playerOrbLogic.maxShotDelay *= 0.8f;
-            levelText.text = "Lv" + playerLogic.level;
-        }
+      gameoverImage.SetActive(true);
     }
+  }
 
-    void GameOver()
-    {
-        if (playerLogic.HP <= 0)
-        {
-            gameoverImage.SetActive(true);
-        }
-    }
+  public void GameRetry()
+  {
+    SceneManager.LoadScene(0);
+  }
 
-    public void GameRetry()
+  void GameQuit()
+  {
+    if (Input.GetKeyDown(KeyCode.Escape))
     {
-        SceneManager.LoadScene(0);
+      Application.Quit();
     }
-
-    void GameQuit()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-    }
+  }
 }
