@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
   public ObjectManager objectManager;
   public GameObject player;
   public GameObject playerOrb;
+  public GameObject playerRoundBallA;
+  public GameObject playerRoundBallB;
+
   Player playerLogic;
   PlayerOrb playerOrbLogic;
 
@@ -69,18 +72,51 @@ public class GameManager : MonoBehaviour
     explosionLogic.StartExplosion();
   }
 
+  public void GetEnemyEssence(Transform enemyPosition, int essenceType, int essenceCount)
+  {
+    float degree = Mathf.PI / essenceCount;
+    Vector2[] movingPos = new Vector2[essenceCount];
+    for (int i = 0; i < essenceCount; i++)
+    {
+      movingPos[i] = new Vector3(Mathf.Cos(i * degree), Mathf.Sin(i * degree), 0);
+      GameObject enemyEssence = objectManager.MakeObj("EnemyEssence");
+      enemyEssence.transform.position = enemyPosition.position;
+      EssenseMove essenceMoveLogic = enemyEssence.GetComponent<EssenseMove>();
+      essenceMoveLogic.player = player;
+      essenceMoveLogic.gameManager = this;
+      essenceMoveLogic.startMovePos = movingPos[i];
+    }
+  }
+
   public void PlayerExpUp(int enemyExp)
   {
-    Debug.Log(enemyExp);
+    int maxLevel = playerLogic.needExp.Length - 1;
     playerLogic.curExp += enemyExp;
     expGage.value = (float)playerLogic.curExp / playerLogic.needExp[playerLogic.level];
-    if (expGage.value >= 1 && playerLogic.level <= 10)
+    if (expGage.value >= 1 && playerLogic.level < maxLevel)
     {
-      expGage.value = 0;
-      playerLogic.curExp = 0;
-      playerLogic.level++;
-      playerOrbLogic.maxShotDelay *= 0.9f;
-      levelText.text = "Lv" + playerLogic.level;
+      PlayerLevelUp();
+    }
+  }
+
+  void PlayerLevelUp()
+  {
+    expGage.value = 0;
+    playerLogic.curExp = 0;
+    playerLogic.level++;
+    playerOrbLogic.maxShotDelay *= 0.9f;
+    levelText.text = "Lv" + playerLogic.level;
+    if (playerLogic.level == 2)
+    {
+      playerRoundBallA.SetActive(true);
+    }
+    if (playerLogic.level == 3)
+    {
+      playerRoundBallB.SetActive(true);
+      Debug.Log(playerRoundBallA.transform.position);
+      Debug.Log(playerRoundBallA.transform.position * (-1));
+      playerRoundBallB.transform.position = playerRoundBallA.transform.position * (-1);
+      playerRoundBallB.transform.rotation = Quaternion.identity;
     }
   }
 

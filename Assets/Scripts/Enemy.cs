@@ -71,7 +71,8 @@ public class Enemy : MonoBehaviour
       enemyAnim.SetTrigger("Die");
       boxCollider2D.enabled = false;
       speed = 0;
-      gameManager.PlayerExpUp(enemyExp);
+      gameManager.GetEnemyEssence(transform, 0, 2);
+      //gameManager.PlayerExpUp(enemyExp);
       Invoke("EnemyDie", 0.8f);
 
       //gameObject.SetActive(false);
