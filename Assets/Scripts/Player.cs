@@ -7,9 +7,6 @@ public class Player : MonoBehaviour
   public Joystick joystick;
 
   public float speed;
-  // public float bulletSpeed;
-  // public float maxShotDelay;
-  // public float curShotDelay;
   public int maxHP;
   public int HP;
 
@@ -19,6 +16,7 @@ public class Player : MonoBehaviour
   public int curExp;
 
   public ObjectManager objectManager;
+  public GameManager gameManager;
   Animator playerAnim;
   SpriteRenderer spriteRenderer;
 
@@ -115,6 +113,7 @@ public class Player : MonoBehaviour
         HP--;
         spriteRenderer.color = new Color32(222, 77, 77, 255);
         Invoke("ReturnHitColor", 0.2f);
+        gameManager.PlayerHitEffect();
       }
 
     }

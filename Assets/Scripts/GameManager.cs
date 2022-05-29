@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
   public GameObject playerOrb;
   public GameObject playerRoundBallA;
   public GameObject playerRoundBallB;
+  public GameObject playerHitEffect;
 
   Player playerLogic;
   PlayerOrb playerOrbLogic;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
   public GameObject gameoverImage;
   public Slider expGage;
   public Text levelText;
+  bool pause = true;
 
   void Awake()
   {
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
     GameQuit();
   }
 
+  // 적 소환
   void SpawnEnemy()
   {
     int randomPoint = UnityEngine.Random.Range(0, 4);
@@ -63,6 +66,7 @@ public class GameManager : MonoBehaviour
     }
   }
 
+  // 발사체 폭발효과
   public void CallExplosion(Vector3 pos)
   {
     GameObject explosion = objectManager.MakeObj("Explosion");
@@ -72,7 +76,8 @@ public class GameManager : MonoBehaviour
     explosionLogic.StartExplosion();
   }
 
-  public void GetEnemyEssence(Transform enemyPosition, int essenceType, int essenceCount)
+  // 적 에센스 획득(적 제거시)
+  public void GetEnemyEssence(Transform enemyPosition, int essenceType, int essenceCount) // 적 위치, 에센스 종류, 에센스 개수
   {
     float degree = Mathf.PI / essenceCount;
     Vector2[] movingPos = new Vector2[essenceCount];
@@ -88,6 +93,7 @@ public class GameManager : MonoBehaviour
     }
   }
 
+  // 플레이어 경험치 획득
   public void PlayerExpUp(int enemyExp)
   {
     int maxLevel = playerLogic.needExp.Length - 1;
@@ -98,7 +104,7 @@ public class GameManager : MonoBehaviour
       PlayerLevelUp();
     }
   }
-
+  // 플레이어 레벨업
   void PlayerLevelUp()
   {
     expGage.value = 0;
@@ -113,13 +119,36 @@ public class GameManager : MonoBehaviour
     if (playerLogic.level == 3)
     {
       playerRoundBallB.SetActive(true);
-      Debug.Log(playerRoundBallA.transform.position);
-      Debug.Log(playerRoundBallA.transform.position * (-1));
-      playerRoundBallB.transform.position = playerRoundBallA.transform.position * (-1);
-      playerRoundBallB.transform.rotation = Quaternion.identity;
+      playerRoundBallB.transform.localPosition = playerRoundBallA.transform.localPosition * (-1);
     }
   }
 
+  // 플레이어 피격 시 붉은화면 이펙트
+  public void PlayerHitEffect()
+  {
+    playerHitEffect.SetActive(true);
+    Invoke("PlayerHitEffectRemove", 0.8f);
+
+  }
+  void PlayerHitEffectRemove()
+  {
+    playerHitEffect.SetActive(false);
+  }
+
+  // 일시정지 관리
+  void PauseManagement()
+  {
+    if (pause == false)
+    {
+      Time.timeScale = 1;
+    }
+    else
+    {
+      Time.timeScale = 0;
+    }
+  }
+
+  // 게임오버
   void GameOver()
   {
     if (playerLogic.HP <= 0)
@@ -127,12 +156,13 @@ public class GameManager : MonoBehaviour
       gameoverImage.SetActive(true);
     }
   }
-
+  // 게임재시작
   public void GameRetry()
   {
     SceneManager.LoadScene(0);
   }
 
+  // 게임종료
   void GameQuit()
   {
     if (Input.GetKeyDown(KeyCode.Escape))
