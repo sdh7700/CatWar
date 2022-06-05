@@ -105,5 +105,11 @@ public class Enemy : MonoBehaviour
       BulletRoundball bulletRoundball = other.gameObject.GetComponent<BulletRoundball>();
       OnHit(bulletRoundball.dmg);
     }
+    if (other.gameObject.tag == "PlayerBeam")
+    {
+      Beam beam = other.gameObject.GetComponent<Beam>();
+      //gameManager.CallExplosion(other.gameObject.transform.position);
+      OnHit(beam.dmg);
+    }
   }
 }
