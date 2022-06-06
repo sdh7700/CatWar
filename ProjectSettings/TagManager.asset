@@ -10,6 +10,7 @@ TagManager:
   - PlayerBullet
   - BlockingFeature
   - PlayerRoundBall
+  - PlayerBeam
   layers:
   - Default
   - TransparentFX
