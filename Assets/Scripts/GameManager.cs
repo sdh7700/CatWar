@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
   public GameObject playerRoundBallA;
   public GameObject playerRoundBallB;
   public GameObject playerHitEffect;
+  public GameObject beamController;
 
   Player playerLogic;
   PlayerOrb playerOrbLogic;
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
   // 적 소환
   void SpawnEnemy()
   {
-    int randomPoint = UnityEngine.Random.Range(0, 4);
+    int randomPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
     try
     {
       GameObject enemy = objectManager.MakeObj("Ghost");
@@ -93,6 +94,26 @@ public class GameManager : MonoBehaviour
     }
   }
 
+  // 가장 가까운 적 찾기
+  public Enemy FindClosestEnemy()
+  {
+    float distanceToClosestEnemy = Mathf.Infinity;
+    Enemy closestEnemy = null;
+    Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
+
+    foreach (Enemy curEnemy in allEnemies)
+    {
+      float distanceToEnemy = (curEnemy.transform.position - player.transform.position).sqrMagnitude;
+      if (distanceToEnemy < distanceToClosestEnemy)
+      {
+        distanceToClosestEnemy = distanceToEnemy;
+        closestEnemy = curEnemy;
+      }
+    }
+
+    return closestEnemy;
+  }
+
   // 플레이어 경험치 획득
   public void PlayerExpUp(int enemyExp)
   {
@@ -110,7 +131,7 @@ public class GameManager : MonoBehaviour
     expGage.value = 0;
     playerLogic.curExp = 0;
     playerLogic.level++;
-    playerOrbLogic.maxShotDelay *= 0.9f;
+    //playerOrbLogic.maxShotDelay *= 0.9f;
     levelText.text = "Lv" + playerLogic.level;
     if (playerLogic.level == 2)
     {
@@ -121,6 +142,10 @@ public class GameManager : MonoBehaviour
       playerRoundBallB.SetActive(true);
       playerRoundBallB.transform.localPosition = playerRoundBallA.transform.localPosition * (-1);
     }
+    if (playerLogic.level == 4)
+    {
+      beamController.SetActive(true);
+    }
   }
 
   // 플레이어 피격 시 붉은화면 이펙트
@@ -128,8 +153,8 @@ public class GameManager : MonoBehaviour
   {
     playerHitEffect.SetActive(true);
     Invoke("PlayerHitEffectRemove", 0.8f);
-
   }
+  // 붉은화면 제거
   void PlayerHitEffectRemove()
   {
     playerHitEffect.SetActive(false);

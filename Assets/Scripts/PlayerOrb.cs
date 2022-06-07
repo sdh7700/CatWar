@@ -50,7 +50,7 @@ public class PlayerOrb : MonoBehaviour
     if (curShotDelay < maxShotDelay)
       return;
     Enemy closestEnemy = null;
-    closestEnemy = FindClosestEnemy();
+    closestEnemy = gameManager.FindClosestEnemy();
     if (closestEnemy != null)
     {
       GameObject bullet = objectManager.MakeObj("NormalBullet");
@@ -75,24 +75,24 @@ public class PlayerOrb : MonoBehaviour
   }
 
   // Find closest enemy
-  Enemy FindClosestEnemy()
-  {
-    float distanceToClosestEnemy = Mathf.Infinity;
-    Enemy closestEnemy = null;
-    Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
+  // public Enemy FindClosestEnemy()
+  // {
+  //   float distanceToClosestEnemy = Mathf.Infinity;
+  //   Enemy closestEnemy = null;
+  //   Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
 
-    foreach (Enemy currentEnemy in allEnemies)
-    {
-      float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
-      if (distanceToEnemy < distanceToClosestEnemy)
-      {
-        distanceToClosestEnemy = distanceToEnemy;
-        closestEnemy = currentEnemy;
-      }
-    }
+  //   foreach (Enemy currentEnemy in allEnemies)
+  //   {
+  //     float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
+  //     if (distanceToEnemy < distanceToClosestEnemy)
+  //     {
+  //       distanceToClosestEnemy = distanceToEnemy;
+  //       closestEnemy = currentEnemy;
+  //     }
+  //   }
 
-    return closestEnemy;
-  }
+  //   return closestEnemy;
+  // }
 
   void Reload()
   {
