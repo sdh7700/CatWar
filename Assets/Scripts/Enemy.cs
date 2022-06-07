@@ -111,5 +111,10 @@ public class Enemy : MonoBehaviour
       //gameManager.CallExplosion(other.gameObject.transform.position);
       OnHit(beam.dmg);
     }
+    if (other.gameObject.tag == "LightningStrike")
+    {
+      LightningStrike lightningStrike = other.gameObject.GetComponent<LightningStrike>();
+      OnHit(lightningStrike.dmg);
+    }
   }
 }

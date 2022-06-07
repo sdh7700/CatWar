@@ -74,26 +74,6 @@ public class PlayerOrb : MonoBehaviour
     spriteRenderer.color = new Color32(255, 255, 255, 255);
   }
 
-  // Find closest enemy
-  // public Enemy FindClosestEnemy()
-  // {
-  //   float distanceToClosestEnemy = Mathf.Infinity;
-  //   Enemy closestEnemy = null;
-  //   Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
-
-  //   foreach (Enemy currentEnemy in allEnemies)
-  //   {
-  //     float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
-  //     if (distanceToEnemy < distanceToClosestEnemy)
-  //     {
-  //       distanceToClosestEnemy = distanceToEnemy;
-  //       closestEnemy = currentEnemy;
-  //     }
-  //   }
-
-  //   return closestEnemy;
-  // }
-
   void Reload()
   {
     curShotDelay += Time.deltaTime;
