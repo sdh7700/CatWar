@@ -5,15 +5,12 @@ using UnityEngine;
 public class LightningStrikeController : MonoBehaviour
 {
   public ObjectManager objectManager;
+  public Transform player;
+  public Camera camera;
+
 
   public float maxShotDelay;
   public float curShotDelay;
-
-  // Start is called before the first frame update
-  void Start()
-  {
-
-  }
 
   // Update is called once per frame
   void Update()
@@ -27,10 +24,12 @@ public class LightningStrikeController : MonoBehaviour
     if (curShotDelay < maxShotDelay)
       return;
     GameObject lightningStrike = objectManager.MakeObj("LightningStrike");
-    float randomPosX = Random.Range(-10, 10);
-    float randomPosY = Random.Range(-7, 7);
-    lightningStrike.transform.localPosition = new Vector3(randomPosX, randomPosY, 0);
-    Debug.Log(randomPosX + "," + randomPosY);
+    int randomRangeY = (int)(camera.orthographicSize - 1);
+    int randomRangeX = (int)(randomRangeY * camera.aspect - 1);
+    int randomPosX = Random.Range(-randomRangeX, randomRangeX);
+    int randomPosY = Random.Range(-randomRangeY, randomRangeY);
+    lightningStrike.transform.position = new Vector3(player.position.x + randomPosX, player.position.y + randomPosY, 0);
+    // lightningStrike.transform.position = new Vector3(player.position.x + randomPosX, player.position.y + randomPosY, 0);
 
     curShotDelay = 0;
   }

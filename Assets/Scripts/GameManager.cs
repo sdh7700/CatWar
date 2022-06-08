@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
   public GameObject playerRoundBallB;
   public GameObject playerHitEffect;
   public GameObject beamController;
+  public GameObject lightningStrikeController;
 
   Player playerLogic;
   PlayerOrb playerOrbLogic;
@@ -145,6 +146,10 @@ public class GameManager : MonoBehaviour
     if (playerLogic.level == 4)
     {
       beamController.SetActive(true);
+    }
+    if (playerLogic.level == 5)
+    {
+      lightningStrikeController.SetActive(true);
     }
   }
 
