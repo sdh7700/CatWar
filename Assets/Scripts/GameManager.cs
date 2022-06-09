@@ -77,6 +77,15 @@ public class GameManager : MonoBehaviour
     explosion.transform.position = pos;
     explosionLogic.StartExplosion();
   }
+  // 라이트닝 폭발효과
+  public void CallLightningExplosion(Vector3 pos)
+  {
+    GameObject lightningExplosion = objectManager.MakeObj("LightningExplosion");
+    Explosion lightningExplosionLogic = lightningExplosion.GetComponent<Explosion>();
+
+    lightningExplosion.transform.position = pos;
+    lightningExplosionLogic.StartExplosion();
+  }
 
   // 적 에센스 획득(적 제거시)
   public void GetEnemyEssence(Transform enemyPosition, int essenceType, int essenceCount) // 적 위치, 에센스 종류, 에센스 개수

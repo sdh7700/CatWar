@@ -11,6 +11,7 @@ public class ObjectManager : MonoBehaviour
   public GameObject ghostPrefab;
 
   public GameObject explosionPrefab;
+  public GameObject lightningExplosionPrefab;
 
   public GameObject enemyEssencePrefab;
 
@@ -23,6 +24,7 @@ public class ObjectManager : MonoBehaviour
   GameObject[] targetPool;
 
   GameObject[] explosion;
+  GameObject[] lightningExplosion;
 
   GameObject[] enemyEssence;
 
@@ -38,6 +40,7 @@ public class ObjectManager : MonoBehaviour
 
     // Explosion
     explosion = new GameObject[100];
+    lightningExplosion = new GameObject[100];
 
     // EnemyEssence
     enemyEssence = new GameObject[200];
@@ -77,6 +80,11 @@ public class ObjectManager : MonoBehaviour
       explosion[i] = Instantiate(explosionPrefab);
       explosion[i].SetActive(false);
     }
+    for (int i = 0; i < lightningExplosion.Length; i++)
+    {
+      lightningExplosion[i] = Instantiate(lightningExplosionPrefab);
+      lightningExplosion[i].SetActive(false);
+    }
 
     // #4. EnemyEssence
     for (int i = 0; i < enemyEssence.Length; i++)
@@ -104,6 +112,9 @@ public class ObjectManager : MonoBehaviour
         break;
       case "Explosion":
         targetPool = explosion;
+        break;
+      case "LightningExplosion":
+        targetPool = lightningExplosion;
         break;
       case "EnemyEssence":
         targetPool = enemyEssence;

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LightningStrike : MonoBehaviour
 {
+  public GameManager gameManager;
+
   public int dmg;
   public float maxOnTime;
   public float curOnTime;
@@ -22,6 +24,14 @@ public class LightningStrike : MonoBehaviour
   void OffLightningEffect()
   {
     gameObject.SetActive(false);
+  }
+
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.tag == "Enemy")
+    {
+      gameManager.CallLightningExplosion(other.transform.position);
+    }
   }
 
 }
