@@ -5,7 +5,6 @@ using UnityEngine;
 public class ObjectManager : MonoBehaviour
 {
   public GameObject normalBulletPrefab;
-  public GameObject plasmaBulletPrefab;
   public GameObject lightningStrikePrefab;
 
   public GameObject ghostPrefab;
@@ -16,7 +15,6 @@ public class ObjectManager : MonoBehaviour
   public GameObject enemyEssencePrefab;
 
   GameObject[] normalBullet;
-  GameObject[] plasmaBullet;
   GameObject[] lightningStrike;
 
   GameObject[] ghost;
@@ -32,7 +30,6 @@ public class ObjectManager : MonoBehaviour
   {
     // bullet
     normalBullet = new GameObject[100];
-    plasmaBullet = new GameObject[100];
     lightningStrike = new GameObject[50];
 
     // enemy
@@ -43,7 +40,7 @@ public class ObjectManager : MonoBehaviour
     lightningExplosion = new GameObject[100];
 
     // EnemyEssence
-    enemyEssence = new GameObject[200];
+    enemyEssence = new GameObject[500];
 
     Generate();
   }
@@ -55,11 +52,6 @@ public class ObjectManager : MonoBehaviour
     {
       normalBullet[i] = Instantiate(normalBulletPrefab);
       normalBullet[i].SetActive(false);
-    }
-    for (int i = 0; i < plasmaBullet.Length; i++)
-    {
-      plasmaBullet[i] = Instantiate(plasmaBulletPrefab);
-      plasmaBullet[i].SetActive(false);
     }
     for (int i = 0; i < lightningStrike.Length; i++)
     {
@@ -100,9 +92,6 @@ public class ObjectManager : MonoBehaviour
     {
       case "NormalBullet":
         targetPool = normalBullet;
-        break;
-      case "PlasmaBullet":
-        targetPool = plasmaBullet;
         break;
       case "LightningStrike":
         targetPool = lightningStrike;

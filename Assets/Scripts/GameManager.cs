@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
   public Transform[] spawnPoints;
   public float maxSpawnDelay;
   public float curSpawnDelay;
+  public float timer;
+  public float timerCount;
 
   public ObjectManager objectManager;
   public GameObject player;
@@ -40,11 +42,18 @@ public class GameManager : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    timer += Time.deltaTime;
     curSpawnDelay += Time.deltaTime;
     if (curSpawnDelay > maxSpawnDelay)
     {
       SpawnEnemy();
       curSpawnDelay = 0;
+      if (timer >= 10 && timerCount < 10)
+      {
+        maxSpawnDelay *= 0.9f;
+        timer = 0;
+        timerCount++;
+      }
     }
     GameOver();
     GameQuit();
@@ -71,11 +80,18 @@ public class GameManager : MonoBehaviour
   // 발사체 폭발효과
   public void CallExplosion(Vector3 pos)
   {
-    GameObject explosion = objectManager.MakeObj("Explosion");
-    Explosion explosionLogic = explosion.GetComponent<Explosion>();
+    try
+    {
+      GameObject explosion = objectManager.MakeObj("Explosion");
+      Explosion explosionLogic = explosion.GetComponent<Explosion>();
 
-    explosion.transform.position = pos;
-    explosionLogic.StartExplosion();
+      explosion.transform.position = pos;
+      explosionLogic.StartExplosion();
+    }
+    catch
+    {
+
+    }
   }
   // 라이트닝 폭발효과
   public void CallLightningExplosion(Vector3 pos)
