@@ -12,6 +12,7 @@ TagManager:
   - PlayerRoundBall
   - PlayerBeam
   - LightningStrike
+  - Floor
   layers:
   - Default
   - TransparentFX

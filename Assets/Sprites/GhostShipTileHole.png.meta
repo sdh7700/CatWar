@@ -14,6 +14,15 @@ TextureImporter:
   - first:
       213: 159981388247731933
     second: GhostShipTileHole_3
+  - first:
+      213: -5863324136273667024
+    second: GhostShipTileHole_4
+  - first:
+      213: 4391433868812549393
+    second: GhostShipTileHole_5
+  - first:
+      213: -2150903347277453407
+    second: GhostShipTileHole_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -218,6 +227,69 @@ TextureImporter:
       bones: []
       spriteID: dde0e29993e583200800000000000000
       internalID: 159981388247731933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhostShipTileHole_4
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03c1f6663c941aea0800000000000000
+      internalID: -5863324136273667024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhostShipTileHole_5
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11df03d36d181fc30800000000000000
+      internalID: 4391433868812549393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhostShipTileHole_6
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a724573dc47622e0800000000000000
+      internalID: -2150903347277453407
       vertices: []
       indices: 
       edges: []
