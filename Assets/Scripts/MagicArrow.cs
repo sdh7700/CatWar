@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class MagicArrow : MonoBehaviour
 {
-  public float speed;
+  public int dmg;
+  public GameObject explosion;
+  public GameManager gameManager;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -14,8 +17,16 @@ public class MagicArrow : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    //transform.position += new Vector3(Time.deltaTime * speed, 0, 0);
+
   }
 
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.tag == "BulletBorder" || other.gameObject.tag == "Enemy")
+    {
+      gameManager.CallExplosion(transform.position);
+      gameObject.SetActive(false);
+    }
+  }
 
 }

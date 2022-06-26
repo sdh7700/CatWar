@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
   public int dmg;
-  public ParticleSystem particleObject;
   public GameObject explosion;
   public GameManager gameManager;
 
@@ -20,7 +19,6 @@ public class Bullet : MonoBehaviour
     if (other.gameObject.tag == "BulletBorder" || other.gameObject.tag == "Enemy")
     {
       gameManager.CallExplosion(transform.position);
-      //particleObject.Stop();
       gameObject.SetActive(false);
     }
   }

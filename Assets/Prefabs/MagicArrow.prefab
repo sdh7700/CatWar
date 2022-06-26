@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8508969855711436489}
   - component: {fileID: 8508969855711436491}
   - component: {fileID: 8508969855711436490}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4814,10 +4814,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8508969855899865819}
   - component: {fileID: 8508969855899865818}
-  - component: {fileID: 8508969855899865812}
-  m_Layer: 0
+  - component: {fileID: 5132810883223048281}
+  - component: {fileID: 8837385741270604722}
+  - component: {fileID: 577757744593743662}
+  m_Layer: 12
   m_Name: MagicArrow
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4888,7 +4890,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8508969855899865812
+--- !u!61 &5132810883223048281
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508969855899865817}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.014134288, y: 0.0014496744}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.03125, y: 0.34375}
+    newSize: {x: 1.03125, y: 0.34375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9420953, y: 0.21907842}
+  m_EdgeRadius: 0
+--- !u!50 &8837385741270604722
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508969855899865817}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &577757744593743662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4897,7 +4946,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8508969855899865817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8534fa01bd9523247a00a16354b6158c, type: 3}
+  m_Script: {fileID: 11500000, guid: d072c05e2454a994f871e6eb32c4b1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  dmg: 2
+  explosion: {fileID: 0}
+  gameManager: {fileID: 0}

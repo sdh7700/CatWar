@@ -97,6 +97,7 @@ public class Enemy : MonoBehaviour
     if (other.gameObject.tag == "PlayerBullet")
     {
       Bullet bullet = other.gameObject.GetComponent<Bullet>();
+      Debug.Log("Damage: " + bullet.dmg);
       OnHit(bullet.dmg);
       //other.gameObject.SetActive(false);
     }

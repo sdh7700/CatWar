@@ -18,6 +18,7 @@ public class PlayerOrb : MonoBehaviour
   // Magic Arrow Status
   public float maxArrowShotDelay;
   public float curArrowShotDelay;
+  public float magicArrowSpeed;
   public int magicArrowCount;
 
   SpriteRenderer spriteRenderer;
@@ -32,6 +33,7 @@ public class PlayerOrb : MonoBehaviour
   {
     Move();
     Fire();
+    FireMagicArrow();
     Reload();
   }
 
@@ -77,7 +79,16 @@ public class PlayerOrb : MonoBehaviour
   {
     if (curArrowShotDelay < maxArrowShotDelay)
       return;
-    GameObject bullet = objectManager.MakeObj("MagicArrow");
+    GameObject magicArrow = objectManager.MakeObj("MagicArrow");
+    Bullet magicArrowLogic = magicArrow.GetComponent<Bullet>();
+    Rigidbody2D rigidMagicArrow = magicArrow.GetComponent<Rigidbody2D>();
+    magicArrowLogic.gameManager = gameManager;
+    magicArrow.transform.position = transform.position;
+    magicArrow.transform.Rotate(Vector3.right);
+    Vector2 fireDirection = Vector2.right;
+
+    rigidMagicArrow.AddForce(fireDirection * magicArrowSpeed, ForceMode2D.Impulse);
+    curArrowShotDelay = 0;
   }
 
   void ReturnColor()
@@ -88,6 +99,7 @@ public class PlayerOrb : MonoBehaviour
   void Reload()
   {
     curShotDelay += Time.deltaTime;
+    curArrowShotDelay += Time.deltaTime;
   }
 
 }

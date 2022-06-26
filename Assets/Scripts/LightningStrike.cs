@@ -7,8 +7,6 @@ public class LightningStrike : MonoBehaviour
   public GameManager gameManager;
 
   public int dmg;
-  public float maxOnTime;
-  public float curOnTime;
   // Start is called before the first frame update
 
   void OnEnable()
