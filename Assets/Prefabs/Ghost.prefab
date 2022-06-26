@@ -151,7 +151,7 @@ MonoBehaviour:
   health: 0
   maxSpeed: 3
   speed: 0
-  withinRange: 50
+  withinRange: 200
   curchangePositionTime: 0
   maxChangePositionTime: 0.5
 --- !u!50 &8091280434647517189

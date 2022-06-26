@@ -10,9 +10,15 @@ public class PlayerOrb : MonoBehaviour
   public Transform playerTransform;
   public GameManager gameManager;
 
+  // Normal Bullet Status
   public float maxShotDelay;
   public float curShotDelay;
   public float bulletSpeed;
+
+  // Magic Arrow Status
+  public float maxArrowShotDelay;
+  public float curArrowShotDelay;
+  public int magicArrowCount;
 
   SpriteRenderer spriteRenderer;
 
@@ -63,10 +69,15 @@ public class PlayerOrb : MonoBehaviour
       rigidBullet.AddForce(now * bulletSpeed, ForceMode2D.Impulse);
       spriteRenderer.color = new Color32(168, 168, 168, 255);
       Invoke("ReturnColor", 0.1f);
-
     }
-
     curShotDelay = 0;
+  }
+
+  void FireMagicArrow()
+  {
+    if (curArrowShotDelay < maxArrowShotDelay)
+      return;
+    GameObject bullet = objectManager.MakeObj("MagicArrow");
   }
 
   void ReturnColor()

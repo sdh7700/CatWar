@@ -6,6 +6,7 @@ public class ObjectManager : MonoBehaviour
 {
   public GameObject normalBulletPrefab;
   public GameObject lightningStrikePrefab;
+  public GameObject magicArrowPrefab;
 
   public GameObject ghostPrefab;
 
@@ -16,6 +17,7 @@ public class ObjectManager : MonoBehaviour
 
   GameObject[] normalBullet;
   GameObject[] lightningStrike;
+  GameObject[] magicArrow;
 
   GameObject[] ghost;
 
@@ -31,6 +33,7 @@ public class ObjectManager : MonoBehaviour
     // bullet
     normalBullet = new GameObject[100];
     lightningStrike = new GameObject[50];
+    magicArrow = new GameObject[100];
 
     // enemy
     ghost = new GameObject[300];
@@ -57,6 +60,11 @@ public class ObjectManager : MonoBehaviour
     {
       lightningStrike[i] = Instantiate(lightningStrikePrefab);
       lightningStrike[i].SetActive(false);
+    }
+    for (int i = 0; i < magicArrow.Length; i++)
+    {
+      magicArrow[i] = Instantiate(magicArrowPrefab);
+      magicArrow[i].SetActive(false);
     }
 
     // #2. Enemy
@@ -95,6 +103,9 @@ public class ObjectManager : MonoBehaviour
         break;
       case "LightningStrike":
         targetPool = lightningStrike;
+        break;
+      case "MagicArrow":
+        targetPool = magicArrow;
         break;
       case "Ghost":
         targetPool = ghost;

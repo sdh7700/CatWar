@@ -1,22 +1,19 @@
 fileFormatVersion: 2
-guid: b9321a03d38982b4da5e4126ffa70a10
+guid: ba33d1c427fc4de4b962892ce3abc026
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6368095726457249782
-    second: GhostShipWall3_0
+      213: -2248153199368234268
+    second: GhostShipStructure_0
   - first:
-      213: 4532496340037841864
-    second: GhostShipWall3_1
+      213: 4656951733820308835
+    second: GhostShipStructure_1
   - first:
-      213: -4160333040932499402
-    second: GhostShipWall3_2
+      213: -7688857387134930457
+    second: GhostShipStructure_2
   - first:
-      213: -5849993834144577405
-    second: GhostShipWall3_3
-  - first:
-      213: -3715364459636175928
-    second: GhostShipWall3_4
+      213: -6217320733071770909
+    second: GhostShipStructure_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,6 +100,18 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -130,106 +139,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GhostShipWall3_0
+      name: GhostShipStructure_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 17
-        width: 40
-        height: 174
+        x: 41
+        y: 64
+        width: 28
+        height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0025d82daaff97a0800000000000000
-      internalID: -6368095726457249782
+      spriteID: 4ea9ffe8394fcc0e0800000000000000
+      internalID: -2248153199368234268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostShipWall3_1
+      name: GhostShipStructure_1
       rect:
         serializedVersion: 2
-        x: 60
-        y: 17
-        width: 40
-        height: 172
+        x: 84
+        y: 64
+        width: 28
+        height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c3b6b53869a6ee30800000000000000
-      internalID: 4532496340037841864
+      spriteID: 36dbf76ade0d0a040800000000000000
+      internalID: 4656951733820308835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostShipWall3_2
+      name: GhostShipStructure_2
       rect:
         serializedVersion: 2
-        x: 107
-        y: 58
-        width: 40
-        height: 8
+        x: 126
+        y: 64
+        width: 28
+        height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 630d5e344278346c0800000000000000
-      internalID: -4160333040932499402
+      spriteID: 7e13f2791f0bb4590800000000000000
+      internalID: -7688857387134930457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostShipWall3_3
+      name: GhostShipStructure_3
       rect:
         serializedVersion: 2
-        x: 108
-        y: 19
-        width: 8
-        height: 32
+        x: 166
+        y: 46
+        width: 75
+        height: 70
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 25}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38846993a95a0dea0800000000000000
-      internalID: -5849993834144577405
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GhostShipWall3_4
-      rect:
-        serializedVersion: 2
-        x: 129
-        y: 19
-        width: 8
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8cb464475bf507cc0800000000000000
-      internalID: -3715364459636175928
+      spriteID: 3eaf59aebb3a7b9a0800000000000000
+      internalID: -6217320733071770909
       vertices: []
       indices: 
       edges: []
