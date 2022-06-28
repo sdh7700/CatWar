@@ -41,7 +41,7 @@ public class PlayerOrb : MonoBehaviour
   {
     if (joystick.Horizontal < 0)
       transform.position = playerTransform.position + new Vector3(-1.2f, 0, 0);
-    else
+    else if (joystick.Horizontal > 0)
       transform.position = playerTransform.position + new Vector3(1.2f, 0, 0);
     // float h = Input.GetAxisRaw("Horizontal");
     // if (Input.GetButton("Horizontal"))
@@ -53,6 +53,7 @@ public class PlayerOrb : MonoBehaviour
     // }
   }
 
+  // 일반 공격 발사
   void Fire()
   {
     if (curShotDelay < maxShotDelay)
@@ -75,19 +76,29 @@ public class PlayerOrb : MonoBehaviour
     curShotDelay = 0;
   }
 
+  // 매직애로우 발사
   void FireMagicArrow()
   {
     if (curArrowShotDelay < maxArrowShotDelay)
       return;
-    GameObject magicArrow = objectManager.MakeObj("MagicArrow");
-    Bullet magicArrowLogic = magicArrow.GetComponent<Bullet>();
-    Rigidbody2D rigidMagicArrow = magicArrow.GetComponent<Rigidbody2D>();
-    magicArrowLogic.gameManager = gameManager;
-    magicArrow.transform.position = transform.position;
-    magicArrow.transform.Rotate(Vector3.right);
-    Vector2 fireDirection = Vector2.right;
 
-    rigidMagicArrow.AddForce(fireDirection * magicArrowSpeed, ForceMode2D.Impulse);
+    float centerAngle = Mathf.Atan2(joystick.input.y, joystick.input.x) * Mathf.Rad2Deg;
+    Debug.Log(centerAngle);
+    int startAngle = magicArrowCount % 2 == 0 ? (magicArrowCount / 2) * -10 + 5 + (int)centerAngle : (magicArrowCount / 2) * -10 + (int)centerAngle;
+    for (int i = 0; i < magicArrowCount; i++)
+    {
+      GameObject magicArrow = objectManager.MakeObj("MagicArrow");
+      Rigidbody2D rigidMagicArrow = magicArrow.GetComponent<Rigidbody2D>();
+      magicArrow.transform.position = transform.position;
+      magicArrow.transform.rotation = Quaternion.identity;
+
+      int fireAngle = startAngle + i * 10;
+      Vector2 dirVec = new Vector2(Mathf.Cos(Mathf.PI * 2 * fireAngle / 360), Mathf.Sin(Mathf.PI * 2 * fireAngle / 360));
+      Vector3 rotVec = Vector3.forward * (fireAngle);
+      magicArrow.transform.Rotate(rotVec);
+      rigidMagicArrow.AddForce(dirVec.normalized * magicArrowSpeed, ForceMode2D.Impulse);
+    }
+
     curArrowShotDelay = 0;
   }
 

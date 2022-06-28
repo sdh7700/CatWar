@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
 {
+  public GameManager gameManager;
+
   public GameObject normalBulletPrefab;
   public GameObject lightningStrikePrefab;
   public GameObject magicArrowPrefab;
@@ -64,6 +66,8 @@ public class ObjectManager : MonoBehaviour
     for (int i = 0; i < magicArrow.Length; i++)
     {
       magicArrow[i] = Instantiate(magicArrowPrefab);
+      Bullet magicArrowLogic = magicArrow[i].GetComponent<Bullet>();
+      magicArrowLogic.gameManager = gameManager;
       magicArrow[i].SetActive(false);
     }
 

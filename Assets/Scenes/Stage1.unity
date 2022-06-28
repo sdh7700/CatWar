@@ -1561,7 +1561,7 @@ MonoBehaviour:
   maxArrowShotDelay: 1
   curArrowShotDelay: 0
   magicArrowSpeed: 20
-  magicArrowCount: 0
+  magicArrowCount: 8
 --- !u!1 &162197377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,6 +1735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handle: {fileID: 875546136}
   outLine: {fileID: 0}
+  input: {x: 0, y: 0, z: 0}
 --- !u!1 &256981662
 GameObject:
   m_ObjectHideFlags: 0
@@ -89598,6 +89599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e42af8bffe6504f9306945f5752ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 755060011}
   normalBulletPrefab: {fileID: 126557141160787889, guid: e640f02b2ab2c5b4aa215776cc5930be, type: 3}
   lightningStrikePrefab: {fileID: 4590863641915452848, guid: 336a50f867a474f48b4ddde1b9b4a55d, type: 3}
   magicArrowPrefab: {fileID: 8508969855899865817, guid: cb96f5f41fd0e974e96f6e88ecd1116f, type: 3}
