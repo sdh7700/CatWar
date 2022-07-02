@@ -83,7 +83,6 @@ public class PlayerOrb : MonoBehaviour
       return;
 
     float centerAngle = Mathf.Atan2(joystick.input.y, joystick.input.x) * Mathf.Rad2Deg;
-    Debug.Log(centerAngle);
     int startAngle = magicArrowCount % 2 == 0 ? (magicArrowCount / 2) * -10 + 5 + (int)centerAngle : (magicArrowCount / 2) * -10 + (int)centerAngle;
     for (int i = 0; i < magicArrowCount; i++)
     {
