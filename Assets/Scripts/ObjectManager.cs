@@ -9,6 +9,7 @@ public class ObjectManager : MonoBehaviour
   public GameObject normalBulletPrefab;
   public GameObject lightningStrikePrefab;
   public GameObject magicArrowPrefab;
+  public GameObject throwingKnifePrefab;
 
   public GameObject ghostPrefab;
 
@@ -20,6 +21,7 @@ public class ObjectManager : MonoBehaviour
   GameObject[] normalBullet;
   GameObject[] lightningStrike;
   GameObject[] magicArrow;
+  GameObject[] throwingKnife;
 
   GameObject[] ghost;
 
@@ -36,6 +38,7 @@ public class ObjectManager : MonoBehaviour
     normalBullet = new GameObject[100];
     lightningStrike = new GameObject[50];
     magicArrow = new GameObject[100];
+    throwingKnife = new GameObject[100];
 
     // enemy
     ghost = new GameObject[300];
@@ -69,6 +72,13 @@ public class ObjectManager : MonoBehaviour
       Bullet magicArrowLogic = magicArrow[i].GetComponent<Bullet>();
       magicArrowLogic.gameManager = gameManager;
       magicArrow[i].SetActive(false);
+    }
+    for (int i = 0; i < throwingKnife.Length; i++)
+    {
+      throwingKnife[i] = Instantiate(throwingKnifePrefab);
+      ThrowingKnife throwingKnifeLogic = throwingKnife[i].GetComponent<ThrowingKnife>();
+      throwingKnifeLogic.gameManager = gameManager;
+      throwingKnife[i].SetActive(false);
     }
 
     // #2. Enemy
@@ -110,6 +120,9 @@ public class ObjectManager : MonoBehaviour
         break;
       case "MagicArrow":
         targetPool = magicArrow;
+        break;
+      case "ThrowingKnife":
+        targetPool = throwingKnife;
         break;
       case "Ghost":
         targetPool = ghost;

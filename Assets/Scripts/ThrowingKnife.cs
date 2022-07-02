@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ThrowingKnife : MonoBehaviour
 {
-  public int rotateSpeed;
+  public int turnSpeed;
+  public int dmg;
+  public GameManager gameManager;
   // Start is called before the first frame update
   void Start()
   {
@@ -15,6 +17,15 @@ public class ThrowingKnife : MonoBehaviour
   void Update()
   {
     Vector3 rotVec = Vector3.forward;
-    transform.Rotate(rotVec * rotateSpeed);
+    transform.Rotate(rotVec * turnSpeed);
+  }
+
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.tag == "BulletBorder" || other.gameObject.tag == "Enemy")
+    {
+      gameManager.CallExplosion(transform.position);
+      gameObject.SetActive(false);
+    }
   }
 }

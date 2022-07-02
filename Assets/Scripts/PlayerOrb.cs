@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerOrb : MonoBehaviour
 {
   public Joystick joystick;
+  Vector3 nowDir; // 현재 바라보는 방향
 
   public ObjectManager objectManager;
   public Transform playerTransform;
@@ -21,11 +22,20 @@ public class PlayerOrb : MonoBehaviour
   public float magicArrowSpeed;
   public int magicArrowCount;
 
+  // Throwing Knife Status
+  public float maxThrowingKnifeShotDelay;
+  public float curThrowingKnifeShotDelay;
+  public float throwingKnifeSpeed;
+  public int maxThrowingKnifeCount;
+  public int curThrowingKnifeCount;
+  public float throwingKnifeFireGap;
+
   SpriteRenderer spriteRenderer;
 
   void Awake()
   {
     spriteRenderer = GetComponent<SpriteRenderer>();
+    nowDir = Vector3.zero;
   }
 
   // Update is called once per frame
@@ -34,6 +44,7 @@ public class PlayerOrb : MonoBehaviour
     Move();
     Fire();
     FireMagicArrow();
+    FireThrowingKnifeController();
     Reload();
   }
 
@@ -82,7 +93,12 @@ public class PlayerOrb : MonoBehaviour
     if (curArrowShotDelay < maxArrowShotDelay)
       return;
 
-    float centerAngle = Mathf.Atan2(joystick.input.y, joystick.input.x) * Mathf.Rad2Deg;
+    // 조이스틱을 놓았을 때 발사방향이 원위치 되는 것을 방지하기 위해
+    if (joystick.input != Vector3.zero)
+      nowDir = joystick.input;
+
+    float centerAngle = Mathf.Atan2(nowDir.y, nowDir.x) * Mathf.Rad2Deg;
+
     int startAngle = magicArrowCount % 2 == 0 ? (magicArrowCount / 2) * -10 + 5 + (int)centerAngle : (magicArrowCount / 2) * -10 + (int)centerAngle;
     for (int i = 0; i < magicArrowCount; i++)
     {
@@ -101,6 +117,41 @@ public class PlayerOrb : MonoBehaviour
     curArrowShotDelay = 0;
   }
 
+  // 표창 발사
+  void FireThrowingKnifeController()
+  {
+    // 발사 딜레이가 아직 안되었거나, 발사 중일 때 취소
+    if ((curThrowingKnifeShotDelay < maxThrowingKnifeShotDelay) || curThrowingKnifeCount != 0)
+      return;
+
+    // 발사
+    FireThrowingKnife();
+    // 발사 끝
+    Debug.Log("FireEnd");
+  }
+  void FireThrowingKnife()
+  {
+    // 발사 개수가 다 채워지면 개수 초기화 및 발사 딜레이 초기화 후 발사 종료
+    if (curThrowingKnifeCount > maxThrowingKnifeCount)
+    {
+      curThrowingKnifeCount = 0;
+      curThrowingKnifeShotDelay = 0;
+      return;
+    }
+    // *발사*
+    GameObject throwingKnife = objectManager.MakeObj("ThrowingKnife");
+    Rigidbody2D rigidThrowingKnife = throwingKnife.GetComponent<Rigidbody2D>();
+    throwingKnife.transform.position = transform.position;
+    throwingKnife.transform.rotation = Quaternion.identity;
+    int fireDirAngle = Random.Range(0, 361);
+    Vector2 fireDir = new Vector2(Mathf.Cos(Mathf.PI * 2 * fireDirAngle / 360), Mathf.Sin(Mathf.PI * 2 * fireDirAngle / 360));
+    rigidThrowingKnife.AddForce(fireDir.normalized * throwingKnifeSpeed, ForceMode2D.Impulse);
+    // 발사 개수 카운트
+    curThrowingKnifeCount++;
+    // 추가 발사
+    Invoke("FireThrowingKnife", throwingKnifeFireGap);
+  }
+
   void ReturnColor()
   {
     spriteRenderer.color = new Color32(255, 255, 255, 255);
@@ -110,6 +161,7 @@ public class PlayerOrb : MonoBehaviour
   {
     curShotDelay += Time.deltaTime;
     curArrowShotDelay += Time.deltaTime;
+    curThrowingKnifeShotDelay += Time.deltaTime;
   }
 
 }

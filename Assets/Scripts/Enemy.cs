@@ -117,5 +117,10 @@ public class Enemy : MonoBehaviour
       LightningStrike lightningStrike = other.gameObject.GetComponent<LightningStrike>();
       OnHit(lightningStrike.dmg);
     }
+    if (other.gameObject.tag == "ThrowingKnife")
+    {
+      ThrowingKnife throwingKnife = other.gameObject.GetComponent<ThrowingKnife>();
+      OnHit(throwingKnife.dmg);
+    }
   }
 }
