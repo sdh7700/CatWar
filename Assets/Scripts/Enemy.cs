@@ -122,5 +122,10 @@ public class Enemy : MonoBehaviour
       ThrowingKnife throwingKnife = other.gameObject.GetComponent<ThrowingKnife>();
       OnHit(throwingKnife.dmg);
     }
+    if (other.gameObject.tag == "Blizzard")
+    {
+      Blizzard blizzard = other.gameObject.GetComponent<Blizzard>();
+      OnHit(blizzard.dmg);
+    }
   }
 }

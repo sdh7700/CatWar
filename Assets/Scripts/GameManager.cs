@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
   public GameObject playerHitEffect;
   public GameObject beamController;
   public GameObject lightningStrikeController;
+  public GameObject blizzardController;
 
   Player playerLogic;
   PlayerOrb playerOrbLogic;
@@ -175,6 +176,10 @@ public class GameManager : MonoBehaviour
     if (playerLogic.level == 5)
     {
       lightningStrikeController.SetActive(true);
+    }
+    if (playerLogic.level == 6)
+    {
+      blizzardController.SetActive(true);
     }
   }
 
