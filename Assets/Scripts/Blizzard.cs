@@ -15,6 +15,7 @@ public class Blizzard : MonoBehaviour
   public float maxBlizzardFallingTime;
   bool isBlizzardFalling;
   public int dmg;
+  public float speed;
 
   // Start is called before the first frame update
   void Start()
@@ -42,8 +43,8 @@ public class Blizzard : MonoBehaviour
       return;
     if (curBlizzardFallingTime < maxBlizzardFallingTime)
     {
-      Vector3 fallVector = new Vector3(0.15f, -0.6f, 0);
-      gameObject.transform.position += fallVector;
+      Vector3 fallVector = new Vector3(1f, -5f, 0);
+      gameObject.transform.position += fallVector * Time.deltaTime * speed;
     }
     else
     {
